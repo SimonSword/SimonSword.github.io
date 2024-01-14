@@ -116,9 +116,9 @@ function checkDistance() {
     }
 
     function vibrate(distance) {
-      showMessage("Vibrate Right!")
+      showMessage("Warning, Wall Proximity!")
 
-      let frequency = 50.0/distance
+      let frequency = 25.0/distance
       let duration = 1000/frequency
       var arr = [];
       for (var i = 1; i < 100+1; i++) {
