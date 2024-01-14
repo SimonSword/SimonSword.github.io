@@ -42,6 +42,13 @@
       color: green; /* Adjust the color as needed */
     }
 
+    .button-container {
+      margin-top: 10px; /* Added margin for better spacing */
+      font-weight: bold;
+      display: flex;
+      flex-direction:  row;
+    }
+
   </style>
 </head>
 <body>
@@ -51,8 +58,10 @@
     <div class="red-point" id="redPoint"></div>
   </div> 
   <div class="message-container" id="messageContainer"></div>
+  <div class="button-container">
   <button onclick="moveLeft()">Left</button>
   <button onclick="moveRight()">Right</button>
+  </div>
 
   <script>
 let redPoint = document.getElementById('redPoint');
@@ -74,6 +83,7 @@ let messageContainer = document.getElementById('messageContainer');
       messageContainer.innerText = message;
     }
 function moveLeft() {
+  stopVibration()
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
   if (currentPosition > 100) {
     redPoint.style.left = (currentPosition - 10) + 'px';
@@ -83,6 +93,7 @@ function moveLeft() {
 }
 
 function moveRight() {
+  stopVibration()
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
   if (currentPosition < 300) {
     redPoint.style.left = (currentPosition + 10) + 'px';
@@ -100,19 +111,27 @@ function checkDistance() {
 
       if (distanceToLeftLine <= 50 || distanceToRightLine <= 50) {
         let distance = Math.min(distanceToLeftLine,distanceToRightLine)
-        playTone(distance);
-      } else 
-      stopTone();
+        vibrate(distance);
+      }
     }
 
-    function playTone(distance) {
+    function vibrate(distance) {
       showMessage("Vibrate Right!")
 
-      let durationVibration = 1000
-      let vibrate =  window.navigator.vibrate([durationVibration]);
+      let frequency = 50.0/distance
+      let duration = 1000/frequency
+      var arr = [];
+      for (var i = 1; i < 100+1; i++) {
+            arr.push(duration);
+        }
+
+      let vibrate =  window.navigator.vibrate(arr);
       if(!vibrate){
         showMessage("ERROR")
       }
+
+
+
 
       var context = new AudioContext();
       var oscillator = context.createOscillator();
@@ -127,7 +146,7 @@ function checkDistance() {
 
     }
 
-    function stopTone() {
+    function stopVibration() {
       navigator.vibrate(0)
     }
 
