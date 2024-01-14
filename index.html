@@ -56,9 +56,21 @@
       transform: translate(-50%, -50%);
     }
 
+    .input-container {
+      margin-bottom: 10px;
+    }
+
   </style>
 </head>
 <body>
+  <div class="input-container">
+    <label for="vibrateParameter">Vibrate Parameter:</label>
+    <input type="text" id="vibrateParameter" placeholder="Default: 100">
+  </div>
+  <div class="input-container">
+    <label for="distanceThres">Distance Threshold:</label>
+    <input type="text" id="distanceThres" placeholder="Default: 50">
+  </div>
   <div class="game-container">
     <div class="vertical-line" style="left: 100px;"></div>
     <div class="vertical-line" style="right: 100px;"></div>
@@ -117,7 +129,10 @@ function checkDistance() {
       let distanceToLeftLine = Math.abs(currentPosition - leftLinePosition);
       let distanceToRightLine = Math.abs(currentPosition - rightLinePosition);
 
-      if (distanceToLeftLine <= 50 || distanceToRightLine <= 50) {
+      let threshold = document.getElementById('distanceThres').value || 50.0;
+
+
+      if (distanceToLeftLine <= threshold || distanceToRightLine <= threshold) {
         let distance = Math.min(distanceToLeftLine,distanceToRightLine)
         vibrate(distance);
       }
@@ -125,7 +140,7 @@ function checkDistance() {
 
     function vibrate(distance) {
       showMessage("WARNING! DISTANCE:" + distance.toString())
-
+      let vibrateDuration = document.getElementById('vibrateParameter').value || 100.0;
       let frequency = 100.0/distance
       let duration = 1000/frequency
       var arr = [];
