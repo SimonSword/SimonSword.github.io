@@ -50,7 +50,8 @@ let redPoint = document.getElementById('redPoint');
 let leftButton = document.querySelector('button:nth-of-type(1)');
 let rightButton = document.querySelector('button:nth-of-type(2)');
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    let oscillator;
+    
+let oscillator;
   
 
 function moveLeft() {
@@ -84,13 +85,8 @@ function checkDistance() {
     }
 
     function playTone(distance) {
-      let durationVibration = distance*5
-      var arr = [];
-
-        for (var i = 1; i < 100+1; i++) {
-            arr.push(durationVibration);
-        }
-      navigator.vibrate(arr);
+      let durationVibration = 2
+      navigator.vibrate(durationVibration);
 
     }
 
