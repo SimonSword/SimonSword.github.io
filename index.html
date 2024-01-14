@@ -34,6 +34,7 @@
       background-color: red;
       transform: translate(-50%, -50%);
     }
+
   </style>
 </head>
 <body>
@@ -41,7 +42,7 @@
     <div class="vertical-line" style="left: 100px;"></div>
     <div class="vertical-line" style="right: 100px;"></div>
     <div class="red-point" id="redPoint"></div>
-  </div>
+  </div> 
   <button onclick="moveLeft()">Left</button>
   <button onclick="moveRight()">Right</button>
 
@@ -52,7 +53,7 @@ let rightButton = document.querySelector('button:nth-of-type(2)');
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
     
 let oscillator;
-  
+navigator.vibrate(2000)
 
 function moveLeft() {
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
