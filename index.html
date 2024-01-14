@@ -42,7 +42,7 @@
     <div class="vertical-line" style="right: 100px;"></div>
     <div class="red-point" id="redPoint"></div>
   </div>
-  <button onclick="moveLeft()">Blubb</button>
+  <button onclick="moveLeft()">Left</button>
   <button onclick="moveRight()">Right</button>
 
   <script>
@@ -86,7 +86,7 @@ function checkDistance() {
 
     function playTone(distance) {
       let durationVibration = 1000
-      navigator.vibrate([durationVibration]);
+      window.navigator.vibrate([durationVibration]);
 
       var context = new AudioContext();
       var oscillator = context.createOscillator();
