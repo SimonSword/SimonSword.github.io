@@ -87,8 +87,8 @@ function moveLeft() {
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
   if (currentPosition > 100) {
     redPoint.style.left = (currentPosition - 10) + 'px';
-    checkDistance()
     showMessage("Moved left!");
+    checkDistance()
   }
 }
 
@@ -97,8 +97,8 @@ function moveRight() {
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
   if (currentPosition < 300) {
     redPoint.style.left = (currentPosition + 10) + 'px';
-    checkDistance()
     showMessage("Moved Right!")
+    checkDistance()
   }
 }
 
@@ -116,7 +116,7 @@ function checkDistance() {
     }
 
     function vibrate(distance) {
-      showMessage("Warning, Wall Proximity!")
+      showMessage("Vibrate Right!")
 
       let frequency = 25.0/distance
       let duration = 1000/frequency
