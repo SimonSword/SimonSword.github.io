@@ -77,7 +77,7 @@ function checkDistance() {
       let distanceToLeftLine = Math.abs(currentPosition - leftLinePosition);
       let distanceToRightLine = Math.abs(currentPosition - rightLinePosition);
 
-      if (distanceToLeftLine <= 30 || distanceToRightLine <= 30) {
+      if (distanceToLeftLine <= 50 || distanceToRightLine <= 50) {
         let distance = Math.min(distanceToLeftLine,distanceToRightLine)
         playTone(distance);
       } else 
@@ -85,8 +85,19 @@ function checkDistance() {
     }
 
     function playTone(distance) {
-      let durationVibration = 200
+      let durationVibration = 1000
       navigator.vibrate([durationVibration]);
+
+      var context = new AudioContext();
+      var oscillator = context.createOscillator();
+      oscillator.type = "sine";
+      oscillator.frequency.value = 800;
+      oscillator.connect(context.destination);
+      oscillator.start();
+      // Beep for 500 milliseconds
+      setTimeout(function () {
+          oscillator.stop();
+      }, 100);
 
     }
 
