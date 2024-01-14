@@ -35,6 +35,12 @@
       transform: translate(-50%, -50%);
     }
 
+    .message-container {
+      margin-top: 10px; /* Added margin for better spacing */
+      font-weight: bold;
+      color: green; /* Adjust the color as needed */
+    }
+
   </style>
 </head>
 <body>
@@ -43,6 +49,7 @@
     <div class="vertical-line" style="right: 100px;"></div>
     <div class="red-point" id="redPoint"></div>
   </div> 
+  <div class="message-container" id="messageContainer"></div>
   <button onclick="moveLeft()">Left</button>
   <button onclick="moveRight()">Right</button>
 
@@ -55,11 +62,19 @@ let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let oscillator;
 navigator.vibrate(2000)
 
+let messageContainer = document.getElementById('messageContainer');
+
+    function showMessage(message) {
+      messageContainer.innerText = message;
+    }
+
+
 function moveLeft() {
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
   if (currentPosition > 100) {
     redPoint.style.left = (currentPosition - 10) + 'px';
     checkDistance()
+    showMessage("Moved left!");
   }
 }
 
@@ -68,6 +83,7 @@ function moveRight() {
   if (currentPosition < 300) {
     redPoint.style.left = (currentPosition + 10) + 'px';
     checkDistance()
+    showMessage("Moved Right!")
   }
 }
 
@@ -86,8 +102,13 @@ function checkDistance() {
     }
 
     function playTone(distance) {
+      showMessage("Vibrate Right!")
+
       let durationVibration = 1000
-      window.navigator.vibrate([durationVibration]);
+      let vibrate =  window.navigator.vibrate([durationVibration]);
+      if(!vibrate){
+        showMessage("ERROR")
+      }
 
       var context = new AudioContext();
       var oscillator = context.createOscillator();
