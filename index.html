@@ -6,6 +6,7 @@
   <style>
     body {
       display: flex;
+      flex-direction:  column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -64,11 +65,14 @@ navigator.vibrate(2000)
 
 let messageContainer = document.getElementById('messageContainer');
 
+
+    showMessage("Start")
+
+
+    
     function showMessage(message) {
       messageContainer.innerText = message;
     }
-
-
 function moveLeft() {
   let currentPosition = parseInt(window.getComputedStyle(redPoint).left);
   if (currentPosition > 100) {
