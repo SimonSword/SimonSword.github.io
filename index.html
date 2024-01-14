@@ -39,7 +39,7 @@
     .message-container {
       margin-top: 10px; /* Added margin for better spacing */
       font-weight: bold;
-      color: green; /* Adjust the color as needed */
+      color: black; /* Adjust the color as needed */
     }
 
     .button-container {
@@ -140,8 +140,8 @@ function checkDistance() {
 
     function vibrate(distance) {
       showMessage("WARNING! DISTANCE:" + distance.toString())
-      let vibrateDuration = document.getElementById('vibrateParameter').value || 100.0;
-      let frequency = 100.0/distance
+      let vibrationParameter = document.getElementById('vibrateParameter').value || 100.0;
+      let frequency = vibrationParameter/distance
       let duration = 1000/frequency
       var arr = [];
       for (var i = 1; i < 100+1; i++) {
